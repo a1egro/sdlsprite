@@ -57,6 +57,17 @@ struct Vector2 {
         y *= scaler;
     }
 
+    template<typename A, class = std::enable_if_t<std::is_arithmetic_v<A>>>
+    Vector2<element> operator/(const A& scaler) const {
+        return std::move(Vector2<element>(x / scaler, y / scaler));
+    }
+
+    template<typename A, class = std::enable_if_t<std::is_arithmetic_v<A>>>
+    void operator/=(const A& scaler) {
+        x /= scaler;
+        y /= scaler;
+    }
+
     [[nodiscard]] float abs2() const {
         return x*x + y*y;
     }

@@ -18,11 +18,11 @@ Sprite::Sprite(const std::shared_ptr<texture::TextureBuffer> &buff, const SDL_Re
 
 }
 
-bool Sprite::intersectsBB(const SDL_FRect &box) const {
+bool Sprite::overlapsBB(const SDL_FRect &box) const {
     // update mBbox just in time (don't update on every move)
     mBbox.x = position.x;
     mBbox.y = position.y;
-    return Drawable::intersectsBB(box);
+    return Drawable::overlapsBB(box);
 }
 
 void Sprite::render(const Vec2f &origin) const {

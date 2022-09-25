@@ -4,7 +4,7 @@ project(sdlsprite)
 set(CMAKE_CXX_STANDARD 17)
 
 # TODO:
-set(SDL_SPRITE_INCLUDEDIR ${PROJECT_SOURCE_DIR}/src)
+set(SDL_SPRITE_INCLUDEDIR ../src)
 #   auto-copy include files to include
 #   install packages
 

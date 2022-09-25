@@ -32,7 +32,7 @@ public:
 
     [[nodiscard]] SDL_Renderer* getRenderer() const { return mRenderer; }
 
-    virtual bool intersectsBB(const SDL_FRect& box) const { return mBbox.intersects(box); };
+    virtual bool overlapsBB(const SDL_FRect& box) const { return mBbox.overlaps(box); };
 
     bool operator==(const Drawable& o) const {
         return mUuid == o.mUuid;
@@ -41,6 +41,8 @@ public:
     bool operator!=(const Drawable& o) const {
         return !operator==(o);
     }
+
+    const auto& getBBox() const { return mBbox; }
 
     virtual void render(const Vec2f &origin) const = 0;
 

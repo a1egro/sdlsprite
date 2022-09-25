@@ -19,7 +19,7 @@ public:
 
     explicit Sprite(const std::shared_ptr<texture::TextureBuffer>& buff, const SDL_Rect& clip= {0, 0, 0, 0});
 
-    bool intersectsBB(const SDL_FRect& box) const override;
+    bool overlapsBB(const SDL_FRect& box) const override;
 
     void render(const Vec2f &origin) const override;
 

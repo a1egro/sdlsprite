@@ -16,7 +16,7 @@ public:
 
 protected:
     std::list<sPointer> drawables;
-    SDL_Renderer *mRenderer = nullptr;
+    mutable SDL_Renderer *mRenderer = nullptr;
 
     int screenWidth = 0, screenHeight = 0;
     Vec2f center, origin;

@@ -12,19 +12,21 @@ namespace core {
 struct BBox {
     float x, y, w, h;
 
-    bool intersects(const SDL_FRect& rect) const {
-        auto d1x = static_cast<float>(rect.x) - (x + w);
-        auto d1y = static_cast<float>(rect.y) - (y + h);
-        auto d2x = x - static_cast<float>(rect.x + rect.w);
-        auto d2y = y - static_cast<float>(rect.y + rect.h);
-
-        if (d1x > 0.0 || d1y > 0.0)
+    [[nodiscard]] bool overlaps(const SDL_FRect& rect) const {
+        if (rect.w == 0 || rect.h == 0 || w == 0 || h == 0)
             return false;
 
-        if (d2x > 0.0 || d2y > 0.0)
+        if (x > (rect.x + rect.w) || rect.x > (x + w))
+            return false;
+
+        if (y > (rect.y + rect.h) || rect.y > (y + h))
             return false;
 
         return true;
+    }
+
+    [[nodiscard]] SDL_FRect asSDL_FRect() const {
+        return { x, y, w, h};
     }
 };
 
