@@ -17,13 +17,13 @@ namespace texture {
 class TextureClip {
     std::shared_ptr<TextureBuffer> mBuff;
     SDL_Rect mClip{};
-    SDL_Rect* mClipPtr;
+    SDL_Rect *mClipPtr;
     int w, h;
 
-public:
-    explicit TextureClip(const std::shared_ptr<TextureBuffer>& buff, const SDL_Rect& clip = {0, 0, 0, 0});
+ public:
+    explicit TextureClip(const std::shared_ptr<TextureBuffer> &buff, const SDL_Rect &clip = {0, 0, 0, 0});
 
-    void renderAt(const Vec2f &pos, const double& rot = 0, const Vec2f& scaling = { 1, 1}) const;
+    void renderAt(const Vec2f &pos, const double &rot = 0, const Vec2f &scaling = {1, 1}) const;
 
     [[nodiscard]] int getWidth() const { return w; }
 

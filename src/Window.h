@@ -23,7 +23,8 @@ class Window {
 
     explicit Window(const std::string &title, const Vec2i &dim = {640, 480},
                     const Vec2i &pos = {SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED},
-                    const SDL_WindowFlags &flags = SDL_WINDOW_SHOWN) {
+                    const SDL_WindowFlags &flags = SDL_WINDOW_SHOWN)
+    {
         // create window and surface
         window = SDL_CreateWindow(title.c_str(), pos.y, pos.y, dim.x, dim.y, flags);
         view.init(window);
@@ -31,15 +32,17 @@ class Window {
 
     friend class WindowManager;
 
-public:
-    ~Window() {
+ public:
+    ~Window()
+    {
         // destroy window
         SDL_DestroyWindow(window);
     }
 
-    auto& getView() { return view; }
+    auto &getView() { return view; }
 
-    void redraw() {
+    void redraw()
+    {
         view.clear();
         view.render();
     }

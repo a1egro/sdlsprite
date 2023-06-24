@@ -13,7 +13,7 @@
 #include "View.h"
 
 class BasicView : public View {
-public:
+ public:
     BasicView() = default;
 
     void render() const override;

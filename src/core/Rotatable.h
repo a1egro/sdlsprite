@@ -8,15 +8,15 @@
 namespace core {
 
 class Rotatable {
-protected:
+ protected:
     double rotation;
 
-public:
+ public:
     Rotatable() : Rotatable(0) { }
 
-    explicit Rotatable(double&& rot) : rotation(rot) { }
+    explicit Rotatable(double &&rot) : rotation(rot) { }
 
-    virtual void setRotation(const double& rot) { rotation = rot; }
+    virtual void setRotation(const double &rot) { rotation = rot; }
 
     [[nodiscard]] double getRotation() const { return rotation; }
 };

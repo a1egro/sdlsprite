@@ -16,22 +16,22 @@ struct Rectangle : public Shape {
     bool mFill = true;
     // TODO: fill color
 
-public:
+ public:
     Rectangle(const Vec2f &position, float w, float h, const SDL_Color &color = {255, 255, 255});
 
     Rectangle(float x, float y, float w, float h, const SDL_Color &color = {255, 255, 255});
 
     Rectangle(const Vec2f &position, const Vec2f &dimensions, const SDL_Color &color = {255, 255, 255});
 
-    void setPos(const Vec2f& pos) override;
+    void setPos(const Vec2f &pos) override;
 
     float getWidth() const { return w; }
 
     float getHeight() const { return h; }
 
-    void setWidth(const float& newWidth);
+    void setWidth(const float &newWidth);
 
-    void setHeight(const float& newHeight);
+    void setHeight(const float &newHeight);
 
     void setFill(bool fill) { mFill = fill; }
 

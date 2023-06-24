@@ -12,7 +12,8 @@ namespace core {
 struct BBox {
     float x, y, w, h;
 
-    [[nodiscard]] bool overlaps(const SDL_FRect& rect) const {
+    [[nodiscard]] bool overlaps(const SDL_FRect &rect) const
+    {
         if (rect.w == 0 || rect.h == 0 || w == 0 || h == 0)
             return false;
 
@@ -25,8 +26,9 @@ struct BBox {
         return true;
     }
 
-    [[nodiscard]] SDL_FRect asSDL_FRect() const {
-        return { x, y, w, h};
+    [[nodiscard]] SDL_FRect asSDL_FRect() const
+    {
+        return {x, y, w, h};
     }
 };
 

@@ -24,7 +24,7 @@ class TextureBuffer {
     int w = 0;
     int h = 0;
 
-public:
+ public:
     TextureBuffer() = default;
 
     void init(SDL_Renderer *renderer, const std::string &path);

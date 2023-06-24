@@ -6,6 +6,7 @@
 
 #include <cmath>
 
-double maths::rotFromAtoB(const Vec2f& a, const Vec2f& b) {
+double maths::rotFromAtoB(const Vec2f &a, const Vec2f &b)
+{
     return std::atan((a.y - b.y) / (a.x - b.x)) + ((b.x < a.x) ? M_PI : 0);
 }

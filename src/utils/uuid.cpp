@@ -4,7 +4,8 @@
 
 #include "uuid.h"
 
-unsigned long uuid::getRng() {
+unsigned long uuid::getRng()
+{
     static std::mt19937 gen(std::chrono::system_clock::now().time_since_epoch().count());
     return gen();
 }

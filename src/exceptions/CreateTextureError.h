@@ -11,9 +11,10 @@
 
 class CreateTextureError : public std::runtime_error {
     std::string path, reason;
-public:
-    explicit CreateTextureError(const std::string& path, const std::string& reason = "")
-        : std::runtime_error("Unable to create texture from " + path + ". Reason: " + reason), path(path), reason(reason) { }
+ public:
+    explicit CreateTextureError(const std::string &path, const std::string &reason = "")
+            : std::runtime_error("Unable to create texture from " + path + ". Reason: " + reason), path(path),
+              reason(reason) { }
 
     [[nodiscard]] std::string getPath() const { return path; }
 

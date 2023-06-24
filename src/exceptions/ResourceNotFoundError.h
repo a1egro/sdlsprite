@@ -11,9 +11,9 @@
 
 class ResourceNotFoundError : public std::runtime_error {
     std::string path, reason;
-public:
-    explicit ResourceNotFoundError(const std::string& path, const std::string& reason = "")
-        : std::runtime_error("Could not load " + path + ". Reason: " + reason), path(path), reason(reason) { }
+ public:
+    explicit ResourceNotFoundError(const std::string &path, const std::string &reason = "")
+            : std::runtime_error("Could not load " + path + ". Reason: " + reason), path(path), reason(reason) { }
 
     [[nodiscard]] std::string getPath() const { return path; }
 

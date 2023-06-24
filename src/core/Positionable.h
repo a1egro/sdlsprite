@@ -10,19 +10,20 @@
 namespace core {
 
 class Positionable {
-protected:
+ protected:
     Vec2f position;
 
-public:
+ public:
     Positionable() : Positionable(0, 0) { }
 
-    explicit Positionable(float&& x, float&& y) : Positionable(Vec2f(std::forward<float>(x), std::forward<float>(y))) { }
+    explicit Positionable(float &&x, float &&y) : Positionable(
+            Vec2f(std::forward<float>(x), std::forward<float>(y))) { }
 
-    explicit Positionable(const Vec2f& pos) : position(pos) { }
+    explicit Positionable(const Vec2f &pos) : position(pos) { }
 
-    virtual void setPos(const float& x, const float& y) { setPos({x, y}); }
+    virtual void setPos(const float &x, const float &y) { setPos({x, y}); }
 
-    virtual void setPos(const Vec2f& newPos) { position = newPos; }
+    virtual void setPos(const Vec2f &newPos) { position = newPos; }
 
     [[nodiscard]] float getX() const { return position.x; }
 

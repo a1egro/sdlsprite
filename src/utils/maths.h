@@ -9,7 +9,7 @@
 
 namespace maths {
 
-double rotFromAtoB(const Vec2f& a, const Vec2f& b);
+double rotFromAtoB(const Vec2f &a, const Vec2f &b);
 
 }
 

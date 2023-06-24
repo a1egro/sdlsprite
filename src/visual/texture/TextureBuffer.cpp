@@ -7,7 +7,8 @@
 #include <SDL2/SDL_image.h>
 #include <cassert>
 
-void texture::TextureBuffer::init(SDL_Renderer *renderer, const std::string &path) {
+void texture::TextureBuffer::init(SDL_Renderer *renderer, const std::string &path)
+{
     assert(renderer != nullptr);
     mRenderer = renderer;
     mPath = path;
@@ -34,7 +35,8 @@ void texture::TextureBuffer::init(SDL_Renderer *renderer, const std::string &pat
     mIsInit = true;
 }
 
-texture::TextureBuffer::~TextureBuffer() {
+texture::TextureBuffer::~TextureBuffer()
+{
     if (mTexture != nullptr) {
         SDL_DestroyTexture(mTexture);
         mTexture = nullptr;

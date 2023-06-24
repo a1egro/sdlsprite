@@ -18,31 +18,34 @@ namespace core {
 
 class Drawable {
     ulong mUuid;
-protected:
+ protected:
     SDL_Renderer *mRenderer = nullptr;
     mutable BBox mBbox;
     bool mHidden = false;
 
-public:
+ public:
     Drawable() : mUuid(uuid::getRng()) { }
 
-    virtual void setRenderer(SDL_Renderer* renderer) {
+    virtual void setRenderer(SDL_Renderer *renderer)
+    {
         mRenderer = renderer;
     }
 
-    [[nodiscard]] SDL_Renderer* getRenderer() const { return mRenderer; }
+    [[nodiscard]] SDL_Renderer *getRenderer() const { return mRenderer; }
 
-    virtual bool overlapsBB(const SDL_FRect& box) const { return mBbox.overlaps(box); };
+    virtual bool overlapsBB(const SDL_FRect &box) const { return mBbox.overlaps(box); };
 
-    bool operator==(const Drawable& o) const {
+    bool operator==(const Drawable &o) const
+    {
         return mUuid == o.mUuid;
     }
 
-    bool operator!=(const Drawable& o) const {
+    bool operator!=(const Drawable &o) const
+    {
         return !operator==(o);
     }
 
-    const auto& getBBox() const { return mBbox; }
+    const auto &getBBox() const { return mBbox; }
 
     virtual void render(const Vec2f &origin) const = 0;
 

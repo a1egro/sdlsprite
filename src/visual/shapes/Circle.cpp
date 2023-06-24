@@ -8,20 +8,24 @@
 
 using namespace shape;
 
-Circle::Circle(float x, float y, float r, const SDL_Color& color) : Circle({x, y}, r, color) {
+Circle::Circle(float x, float y, float r, const SDL_Color &color) : Circle({x, y}, r, color)
+{
 
 }
 
-Circle::Circle(const Vec2f& position, float r, const SDL_Color& color) : Shape(color), r(r) {
+Circle::Circle(const Vec2f &position, float r, const SDL_Color &color) : Shape(color), r(r)
+{
     this->position = position;
 }
 
-float Circle::getArea() const {
-    return r*r*static_cast<float>(M_PI);
+float Circle::getArea() const
+{
+    return r * r * static_cast<float>(M_PI);
 }
 
 /// applies the midpoint algorithm as described in https://stackoverflow.com/a/48291620
-void Circle::render(const Vec2f &origin) const {
+void Circle::render(const Vec2f &origin) const
+{
     const auto realPos = position - origin;
     const auto diameter = r * 2;
 
@@ -33,8 +37,7 @@ void Circle::render(const Vec2f &origin) const {
 
     SDL_SetRenderDrawColor(mRenderer, UNPACK_COL(m_color));
 
-    while (dx >= dy)
-    {
+    while (dx >= dy) {
         //  Each of the following renders an octant of the circle
         SDL_RenderDrawPointF(mRenderer, realPos.x + dx, realPos.y - dy);
         SDL_RenderDrawPointF(mRenderer, realPos.x + dx, realPos.y + dy);
@@ -49,8 +52,7 @@ void Circle::render(const Vec2f &origin) const {
             ++dy;
             error += ty;
             ty += 2;
-        }
-        else {
+        } else {
             --dx;
             tx += 2;
             error += (tx - diameter);

@@ -12,9 +12,10 @@
 const Vec2i WindowManager::DEFAULT_DIMENSION = {640, 480};
 const Vec2i WindowManager::DEFAULT_POSITION = {SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED};
 
-WindowManager::WindowManager() {
+WindowManager::WindowManager()
+{
     // initialize SDL
-    if(SDL_Init(SDL_INIT_VIDEO) < 0) {
+    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         std::stringstream ss;
         ss << "SDL could not initialize! SDL_Error: " << SDL_GetError() << std::endl;
         throw std::runtime_error(ss.str());
@@ -29,7 +30,8 @@ WindowManager::WindowManager() {
     }
 }
 
-WindowManager::~WindowManager() {
+WindowManager::~WindowManager()
+{
     // quit SDL subsystems
     IMG_Quit();
     SDL_Quit();
