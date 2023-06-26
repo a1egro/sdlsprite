@@ -10,8 +10,13 @@
 
 namespace shape {
 
+/**
+ * A line between two explicitly set end points.
+ * The transform component inherited from shape is used as reference point for the line.
+ * A.k.a. when the transform moves, the line moves as a whole.
+ */
 class Line : public Shape {
-    Vec2f p1, p2;
+    Vec2f m_p1, m_p2;
 
     void updateBB() noexcept;
 
@@ -24,16 +29,11 @@ class Line : public Shape {
 
     void setP2(const Vec2f &newP2);
 
-    Vec2f getP1() const { return p1; }
+    [[nodiscard]] inline Vec2f getP1() const { return m_p1; }
 
-    Vec2f getP2() const { return p2; }
+    [[nodiscard]] inline Vec2f getP2() const { return m_p2; }
 
-    void render(const Vec2f &origin) const override
-    {
-        SDL_SetRenderDrawColor(mRenderer, UNPACK_COL(m_color));
-        SDL_RenderDrawLineF(mRenderer, p1.x - origin.x, p1.y - origin.y,
-                            p2.x - origin.x, p2.y - origin.y);
-    };
+    void render(const Vec2f &origin) const override;
 };
 
 }

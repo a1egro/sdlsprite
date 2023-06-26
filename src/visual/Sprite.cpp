@@ -23,14 +23,14 @@ Sprite::Sprite(const std::shared_ptr<texture::TextureBuffer> &buff, const SDL_Re
 bool Sprite::overlapsBB(const SDL_FRect &box) const
 {
     // update mBbox just in time (don't update on every move)
-    mBbox.x = position.x;
-    mBbox.y = position.y;
+    mBbox.x = getTransform().getX();
+    mBbox.y = getTransform().getY();
     return Drawable::overlapsBB(box);
 }
 
 void Sprite::render(const Vec2f &origin) const
 {
-    mTextClip->renderAt(position - origin, rotation, mScaling);
+    mTextClip->renderAt(getTransform().getPosition() - origin, getTransform().getRotation(), mScaling);
 }
 
 void Sprite::setScale(float scale)
@@ -47,4 +47,9 @@ void Sprite::setScaling(Vec2f scaling)
 Vec2f Sprite::getScaling() const
 {
     return mScaling;
+}
+
+Vec2f Sprite::getCenter() const
+{
+    return getTransform().getPosition() + Vec2f(getWidth() / 2.f, getHeight() / 2.f);
 }

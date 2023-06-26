@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.16)
 project(sdlsprite)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -21,6 +21,9 @@ add_library(sdlsprite STATIC
         src/BasicView.cpp
         src/Window.cpp
         src/View.cpp
+        src/core/Transform.cpp
+        src/core/GameObject.cpp
+        src/core/Positionable.cpp
     )
 
 target_include_directories(${PROJECT_NAME} PRIVATE src)

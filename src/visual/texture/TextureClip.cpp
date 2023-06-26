@@ -23,6 +23,15 @@ texture::TextureClip::TextureClip(const std::shared_ptr<TextureBuffer> &buff, co
     }
 }
 
+void texture::TextureClip::renderAt(const Vec2f &pos, const Vec2f &scaling) const
+{
+    auto renderer = mBuff->getRenderer();
+
+    SDL_FRect renderQuad = {pos.x, pos.y,
+                            static_cast<float>(w)*scaling.x, static_cast<float>(h)*scaling.y};
+    SDL_RenderCopyF(renderer, mBuff->getTexture(), mClipPtr, &renderQuad);
+}
+
 void texture::TextureClip::renderAt(const Vec2f &pos, const double &rot, const Vec2f &scaling) const
 {
     auto renderer = mBuff->getRenderer();

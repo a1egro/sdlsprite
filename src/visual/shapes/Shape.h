@@ -8,21 +8,31 @@
 #include <SDL2/SDL_pixels.h>
 #include "core/Positionable.h"
 #include "core/Drawable.h"
+#include "core/Transform.h"
+#include "core/GameObject.h"
 
 namespace shape {
 
-struct Shape : public core::Drawable, public core::Positionable {
-    SDL_Color m_color;
+class Shape : public core::Drawable, public GameObject {
+ public:
+    explicit Shape(const SDL_Color &color, bool lock_rot = true) noexcept: m_color(color) { }
 
-    explicit Shape(const SDL_Color &color) noexcept: m_color(color) { }
+    inline auto getColor() const
+    {
+        return m_color;
+    }
 
-    auto getColor() const { return m_color; }
-
-    void setColor(const SDL_Color &color) { m_color = color; }
+    inline void setColor(const SDL_Color &color)
+    {
+        m_color = color;
+    }
 
     [[nodiscard]] virtual float getArea() const = 0;
 
     virtual ~Shape() = default;
+
+ private:
+    SDL_Color m_color;
 };
 
 }

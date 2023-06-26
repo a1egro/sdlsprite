@@ -9,8 +9,10 @@
 #include "core/Rotatable.h"
 #include "core/Drawable.h"
 #include "visual/texture/TextureClip.h"
+#include "core/Transform.h"
+#include "core/GameObject.h"
 
-class Sprite : public core::Drawable, public core::Movable, public core::Rotatable {
+class Sprite : public core::Drawable, public GameObject {
     std::shared_ptr<texture::TextureClip> mTextClip;
     Vec2f mScaling{1, 1};
 
@@ -27,7 +29,7 @@ class Sprite : public core::Drawable, public core::Movable, public core::Rotatab
 
     [[nodiscard]] float getHeight() const { return mTextClip->getHeight() * mScaling.y; }
 
-    [[nodiscard]] Vec2f getCenter() const { return position + Vec2f(getWidth() / 2.f, getHeight() / 2.f); }
+    [[nodiscard]] Vec2f getCenter() const;
 
     void setScale(float scale);
 

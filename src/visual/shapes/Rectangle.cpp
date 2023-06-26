@@ -8,21 +8,19 @@ using namespace shape;
 
 Rectangle::Rectangle(const Vec2f &position, float w, float h, const SDL_Color &color) : Shape(color), w(w), h(h)
 {
-    this->position = position;
+    getTransform().setPosition(position);
+    getTransform().registerCallbackPositionChanged([this](auto &newPos) { onPosChange(newPos); });
 }
 
-Rectangle::Rectangle(float x, float y, float w, float h, const SDL_Color &color) : Rectangle({x, y},
-                                                                                             w, h,
-                                                                                             color) { }
+Rectangle::Rectangle(float x, float y, float w, float h, const SDL_Color &color) : Rectangle({x, y}, w, h, color) { }
 
 Rectangle::Rectangle(const Vec2f &position, const Vec2f &dimensions, const SDL_Color &color) : Rectangle(position,
                                                                                                          dimensions.x,
                                                                                                          dimensions.y,
                                                                                                          color) { }
 
-void Rectangle::setPos(const Vec2f &pos)
+void Rectangle::onPosChange(const Vec2f &pos)
 {
-    Positionable::setPos(pos);
     mBbox.x = pos.x;
     mBbox.y = pos.y;
 }
@@ -46,8 +44,8 @@ float Rectangle::getArea() const
 
 void Rectangle::render(const Vec2f &origin) const
 {
-    SDL_SetRenderDrawColor(mRenderer, UNPACK_COL(m_color));
-    SDL_FRect r{position.x - origin.x, position.y - origin.y, w, h};
+    SDL_SetRenderDrawColor(mRenderer, UNPACK_COL(getColor()));
+    SDL_FRect r{getTransform().getX() - origin.x, getTransform().getY() - origin.y, w, h};
 
     if (mFill) {
         SDL_RenderFillRectF(mRenderer, &r);

@@ -6,10 +6,11 @@
 #define TANO_MOVABLE_H
 
 #include "Positionable.h"
+#include "TimeDependent.h"
 
 namespace core {
 
-class Movable : public Positionable {
+class Movable : public Positionable, public TimeDependent {
     Vec2f velocity;
 
  public:
@@ -30,7 +31,7 @@ class Movable : public Positionable {
 
     [[nodiscard]] Vec2f getVelocity() const { return velocity; }
 
-    void update(float deltaT) { position += (velocity * deltaT); }
+    void update(float deltaT) override { shift(velocity * deltaT); }
 };
 
 }
