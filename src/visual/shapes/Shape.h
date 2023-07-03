@@ -14,8 +14,15 @@
 namespace shape {
 
 class Shape : public core::Drawable, public GameObject {
+ protected:
+    virtual void updateBB() const = 0;
+
  public:
-    explicit Shape(const SDL_Color &color, bool lock_rot = true) noexcept: m_color(color) { }
+    explicit Shape(const Vec2f &dimensions, const SDL_Color &color, bool lock_rot = true) noexcept:
+            core::Drawable(dimensions), m_color(color)
+    {
+
+    }
 
     inline auto getColor() const
     {
@@ -25,6 +32,13 @@ class Shape : public core::Drawable, public GameObject {
     inline void setColor(const SDL_Color &color)
     {
         m_color = color;
+    }
+
+    bool overlapsBB(const SDL_FRect &box) const override
+    {
+        // update mBbox just in time (don't update on every move)
+        updateBB();
+        return Drawable::overlapsBB(box);
     }
 
     [[nodiscard]] virtual float getArea() const = 0;

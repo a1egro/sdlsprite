@@ -16,7 +16,8 @@ struct Rectangle : public Shape {
     bool mFill = true;
     // TODO: fill color
 
-    void onPosChange(const Vec2f &pos);
+ protected:
+    void updateBB() const override;
 
  public:
     Rectangle(const Vec2f &position, float w, float h, const SDL_Color &color = {255, 255, 255});

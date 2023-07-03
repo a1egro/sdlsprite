@@ -6,10 +6,10 @@
 
 using namespace shape;
 
-Rectangle::Rectangle(const Vec2f &position, float w, float h, const SDL_Color &color) : Shape(color), w(w), h(h)
+Rectangle::Rectangle(const Vec2f &position, float w, float h, const SDL_Color &color) : Shape(Vec2f(w, h), color),
+                                                                                        w(w), h(h)
 {
     getTransform().setPosition(position);
-    getTransform().registerCallbackPositionChanged([this](auto &newPos) { onPosChange(newPos); });
 }
 
 Rectangle::Rectangle(float x, float y, float w, float h, const SDL_Color &color) : Rectangle({x, y}, w, h, color) { }
@@ -19,22 +19,22 @@ Rectangle::Rectangle(const Vec2f &position, const Vec2f &dimensions, const SDL_C
                                                                                                          dimensions.y,
                                                                                                          color) { }
 
-void Rectangle::onPosChange(const Vec2f &pos)
+void Rectangle::updateBB() const
 {
-    mBbox.x = pos.x;
-    mBbox.y = pos.y;
+    mBbox.x = getTransform().getX();
+    mBbox.y = getTransform().getY();
+    mBbox.w = w;
+    mBbox.h = h;
 }
 
 void Rectangle::setWidth(const float &newWidth)
 {
     w = newWidth;
-    mBbox.w = w;
 }
 
 void Rectangle::setHeight(const float &newHeight)
 {
     h = newHeight;
-    mBbox.h = h;
 }
 
 float Rectangle::getArea() const

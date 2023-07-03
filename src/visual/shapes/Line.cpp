@@ -8,22 +8,24 @@
 
 using namespace shape;
 
-Line::Line(const Vec2f &point1, const Vec2f &point2, SDL_Color color) noexcept: Shape(color),
-                                                                                m_p1(point1),
-                                                                                m_p2(point2)
+Line::Line(const Vec2f &point1, const Vec2f &point2, SDL_Color color) noexcept:
+        Shape(getDimensionsFromPoints(point1, point2), color), m_p1(point1), m_p2(point2) { }
+
+Vec2f Line::getDimensionsFromPoints(const Vec2f &p1, const Vec2f &p2)
 {
-    getTransform().registerCallbackPositionChanged([this](auto &p) { updateBB(); });
+    return {fabs(p1.x - p2.x), fabs(p1.y - p2.y)};
 }
 
-void Line::updateBB() noexcept
+void Line::updateBB() const noexcept
 {
     auto p1 = getTransform().getPosition() + getP1();
     auto p2 = getTransform().getPosition() + getP2();
+    auto wh = getDimensionsFromPoints(p1, p2);
 
     mBbox.x = fmin(p1.x, p2.x);
     mBbox.y = fmin(p1.y, p2.y);
-    mBbox.w = fabs(p1.x - p2.x);
-    mBbox.h = fabs(p1.y - p2.y);
+    mBbox.w = wh.x;
+    mBbox.h = wh.y;
 }
 
 void Line::setP1(const Vec2f &newP1)

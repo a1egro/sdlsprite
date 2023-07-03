@@ -12,32 +12,32 @@ void View::init(SDL_Window *window)
     SDL_GetWindowSize(window, &screenWidth, &screenHeight);
     updateOrigin();
 
-    mRenderer = SDL_GetRenderer(window);
+    m_renderer = SDL_GetRenderer(window);
 
-    if (!mRenderer) {
-        mRenderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    if (!m_renderer) {
+        m_renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     }
 
-    assert(mRenderer != nullptr);
+    assert(m_renderer != nullptr);
 }
 
 void View::addDrawable(const View::sPointer &drawable)
 {
     assert(drawable != nullptr);
-    drawable->setRenderer(mRenderer);
-    drawables.push_back(drawable);
+    drawable->setRenderer(m_renderer);
+    m_drawables.push_back(drawable);
 }
 
 void View::removeDrawable(const View::sPointer &drawable)
 {
-    drawables.remove(drawable);
+    m_drawables.remove(drawable);
 }
 
 View::~View()
 {
-    // deallocate mRenderer
-    SDL_DestroyRenderer(mRenderer);
-    mRenderer = nullptr;
+    // deallocate renderer
+    SDL_DestroyRenderer(m_renderer);
+    m_renderer = nullptr;
 }
 
 void View::resize(const int &width, const int &height)

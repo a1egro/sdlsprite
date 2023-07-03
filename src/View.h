@@ -15,11 +15,12 @@ class View {
     typedef std::shared_ptr<element> sPointer;
 
  protected:
-    std::list<sPointer> drawables;
-    mutable SDL_Renderer *mRenderer = nullptr;
+    std::list<sPointer> m_drawables;
+    mutable SDL_Renderer *m_renderer = nullptr;
 
     int screenWidth = 0, screenHeight = 0;
-    Vec2f center, origin;
+    Vec2f center = {0, 0};
+    Vec2f origin;
 
     virtual void updateOrigin()
     {
@@ -46,19 +47,21 @@ class View {
 
     void clear()
     {
-        SDL_SetRenderDrawColor(mRenderer, 0, 0, 0, 0);
-        SDL_RenderClear(mRenderer);
+        SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 0);
+        SDL_RenderClear(m_renderer);
     }
 
     void resize(const int &width, const int &height);
 
-    [[nodiscard]] SDL_Renderer *getRenderer() const { return mRenderer; }
+    [[nodiscard]] SDL_Renderer *getRenderer() const { return m_renderer; }
 
     void setCenter(const Vec2f &newCenter);
 
-    Vec2f getCenter() { return center; }
+    Vec2f getCenter() const { return center; }
 
-    Vec2f getOrigin() { return origin; }
+    Vec2f getOrigin() const { return origin; }
+
+    Vec2i getDimensions() const { return {screenWidth, screenHeight}; }
 };
 
 

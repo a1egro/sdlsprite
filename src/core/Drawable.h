@@ -24,7 +24,11 @@ class Drawable {
     bool mHidden = false;
 
  public:
-    Drawable() : mUuid(uuid::getRng()) { }
+    Drawable() : Drawable({0, 0}) { }
+
+    explicit Drawable(Vec2f dimensions) : Drawable({0, 0}, dimensions) { }
+
+    Drawable(Vec2f position, Vec2f dimensions) : mUuid(uuid::getRng()), mBbox({position.x, position.y, dimensions.x, dimensions.y}) { }
 
     virtual void setRenderer(SDL_Renderer *renderer)
     {

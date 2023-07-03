@@ -13,23 +13,23 @@ Circle::Circle(float x, float y, float r, const SDL_Color &color) : Circle({x, y
 
 }
 
-Circle::Circle(const Vec2f &position, float r, const SDL_Color &color) : Shape(color), r(r)
+Circle::Circle(const Vec2f &position, float r, const SDL_Color &color) : Shape({2*r, 2*r}, color), m_r(r)
 {
     getTransform().setPosition(position);
 }
 
 float Circle::getArea() const
 {
-    return r * r * static_cast<float>(M_PI);
+    return m_r * m_r * static_cast<float>(M_PI);
 }
 
 /// applies the midpoint algorithm as described in https://stackoverflow.com/a/48291620
 void Circle::render(const Vec2f &origin) const
 {
     const auto realPos = getTransform().getPosition() - origin;
-    const auto diameter = r * 2;
+    const auto diameter = m_r * 2;
 
-    float dx = r - 1;
+    float dx = m_r - 1;
     float dy = 0;
     float tx = 1;
     float ty = 1;
@@ -58,4 +58,22 @@ void Circle::render(const Vec2f &origin) const
             error += (tx - diameter);
         }
     }
+}
+
+void Circle::updateBB() const
+{
+    mBbox.x = getTransform().getX() - m_r;
+    mBbox.y = getTransform().getY() - m_r;
+    mBbox.w = 2 * m_r;
+    mBbox.h = 2 * m_r;
+}
+
+float Circle::getRadius() const
+{
+    return m_r;
+}
+
+void Circle::setRadius(float r)
+{
+    Circle::m_r = r;
 }

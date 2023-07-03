@@ -18,7 +18,10 @@ namespace shape {
 class Line : public Shape {
     Vec2f m_p1, m_p2;
 
-    void updateBB() noexcept;
+    void updateBB() const noexcept override;
+
+ protected:
+    static Vec2f getDimensionsFromPoints(const Vec2f &p1, const Vec2f &p2);
 
  public:
     Line(const Vec2f &point1, const Vec2f &point2, SDL_Color color = {255, 255, 255, 0}) noexcept;
