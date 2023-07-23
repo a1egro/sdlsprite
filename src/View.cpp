@@ -21,15 +21,16 @@ void View::init(SDL_Window *window)
     assert(m_renderer != nullptr);
 }
 
-void View::addDrawable(const View::sPointer &drawable)
+void View::addDrawable(const View::sp_drawable &drawable)
 {
     assert(drawable != nullptr);
     drawable->setRenderer(m_renderer);
     m_drawables.push_back(drawable);
 }
 
-void View::removeDrawable(const View::sPointer &drawable)
+void View::removeDrawable(const View::sp_drawable &drawable)
 {
+    assert(drawable != nullptr);
     m_drawables.remove(drawable);
 }
 
@@ -51,6 +52,30 @@ void View::setCenter(const Vec2f &newCenter)
 {
     center = newCenter;
     updateOrigin();
+}
+
+void View::addClickable(const View::sp_clickable &clickable)
+{
+    assert(clickable != nullptr);
+    m_clickable.push_back(clickable);
+}
+
+void View::removeClickable(const View::sp_clickable &clickable)
+{
+    assert(clickable != nullptr);
+    m_clickable.remove(clickable);
+}
+
+void View::processClick(const Vec2f &position)
+{
+    const auto posInView = position + getOrigin();
+    for (auto &clickable: m_clickable) {
+        auto relPos = posInView - clickable->getTransform().getPosition();
+
+        if (relPos.abs2() < clickable->getMaxClickDistance2() && clickable->isClicked(relPos)) {
+            clickable->onClicked(relPos);
+        }
+    }
 }
 
 #undef UNPACK_COL

@@ -8,14 +8,18 @@
 #include <list>
 #include <memory>
 #include "core/Drawable.h"
+#include "core/Clickable.h"
 
 class View {
  public:
-    typedef core::Drawable element;
-    typedef std::shared_ptr<element> sPointer;
+    typedef core::Drawable drawable;
+    typedef std::shared_ptr<drawable> sp_drawable;
+    typedef core::Clickable clickable;
+    typedef std::shared_ptr<clickable> sp_clickable;
 
  protected:
-    std::list<sPointer> m_drawables;
+    std::list<sp_drawable> m_drawables;
+    std::list<sp_clickable> m_clickable;
     mutable SDL_Renderer *m_renderer = nullptr;
 
     int screenWidth = 0, screenHeight = 0;
@@ -39,9 +43,15 @@ class View {
 
     void init(SDL_Window *window);
 
-    void addDrawable(const sPointer &drawable);
+    void addDrawable(const sp_drawable &drawable);
 
-    void removeDrawable(const sPointer &drawable);
+    void addClickable(const sp_clickable &clickable);
+
+    void removeDrawable(const sp_drawable &drawable);
+
+    void removeClickable(const sp_clickable  &clickable);
+
+    void processClick(const Vec2f& position);
 
     virtual void render() const = 0;
 

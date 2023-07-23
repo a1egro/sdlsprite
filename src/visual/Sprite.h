@@ -36,6 +36,8 @@ class Sprite : public core::Drawable, public GameObject {
     void setScaling(Vec2f scaling);
 
     Vec2f getScaling() const;
+
+    const std::shared_ptr<texture::TextureClip> &getTextureClip() const;
 };
 
 #endif //GEXX_GAMEOBJECT_H

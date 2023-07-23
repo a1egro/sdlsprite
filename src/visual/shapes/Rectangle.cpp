@@ -2,6 +2,7 @@
 // Created by alex on 02.03.22.
 //
 
+#include <iostream>
 #include "Rectangle.h"
 
 using namespace shape;

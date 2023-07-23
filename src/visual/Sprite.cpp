@@ -53,3 +53,8 @@ Vec2f Sprite::getCenter() const
 {
     return getTransform().getPosition() + Vec2f(getWidth() / 2.f, getHeight() / 2.f);
 }
+
+const std::shared_ptr<texture::TextureClip> &Sprite::getTextureClip() const
+{
+    return mTextClip;
+}

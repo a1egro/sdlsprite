@@ -7,6 +7,7 @@
 
 #include <cmath>
 #include <type_traits>
+#include <ostream>
 #include <utility>
 
 template<typename T = float, class = std::enable_if_t<std::is_arithmetic_v<T>>>
@@ -106,7 +107,16 @@ struct Vector2 {
     {
         return {static_cast<U>(x), static_cast<U>(y)};
     }
+
+    template<typename FriendT>
+    friend std::ostream& operator<<(std::ostream& os, Vector2<T> v);
 };
 
+template<typename T>
+std::ostream& operator<<(std::ostream& os, Vector2<T> v)
+{
+    os << "(" << v.x << "," << v.y << ")";
+    return os;
+}
 
 #endif //TANO_VECTOR2_H
