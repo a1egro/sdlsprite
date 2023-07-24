@@ -17,7 +17,7 @@ namespace texture {
 class TextureClip {
     std::shared_ptr<TextureBuffer> mBuff;
     SDL_Rect mClip{};
-    SDL_Rect *mClipPtr;
+    SDL_Rect *mClipPtr = nullptr;
     int w, h;
 
  public:

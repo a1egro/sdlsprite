@@ -2,8 +2,8 @@
 // Created by alex on 08.03.22.
 //
 
-#ifndef TANO_ROTATABLE_H
-#define TANO_ROTATABLE_H
+#ifndef SDLSPRITE_ROTATABLE_H
+#define SDLSPRITE_ROTATABLE_H
 
 namespace core {
 
@@ -40,4 +40,4 @@ class Rotatable {
 
 }
 
-#endif //TANO_ROTATABLE_H
+#endif //SDLSPRITE_ROTATABLE_H

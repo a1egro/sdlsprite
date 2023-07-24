@@ -24,8 +24,9 @@ add_library(sdlsprite STATIC
         src/core/Transform.cpp
         src/core/GameObject.cpp
         src/core/Positionable.cpp
+        src/visual/Animation.cpp
     )
 
 target_include_directories(${PROJECT_NAME} PRIVATE src)
 
-target_link_libraries(${PROJECT_NAME} SDL2 SDL2_image)
+target_link_libraries(${PROJECT_NAME} SDL2 SDL2_image pthread)

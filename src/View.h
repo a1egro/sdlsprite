@@ -25,6 +25,7 @@ class View {
     int screenWidth = 0, screenHeight = 0;
     Vec2f center = {0, 0};
     Vec2f origin;
+    SDL_Color m_clearColor {0, 0, 0, 0};
 
     virtual void updateOrigin()
     {
@@ -57,7 +58,11 @@ class View {
 
     void clear()
     {
-        SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 0);
+        SDL_SetRenderDrawColor(m_renderer,
+                               m_clearColor.r,
+                               m_clearColor.g,
+                               m_clearColor.b,
+                               m_clearColor.a);
         SDL_RenderClear(m_renderer);
     }
 
@@ -72,6 +77,10 @@ class View {
     Vec2f getOrigin() const { return origin; }
 
     Vec2i getDimensions() const { return {screenWidth, screenHeight}; }
+
+    const SDL_Color &getClearColor() const;
+
+    void setClearColor(const SDL_Color &clearColor);
 };
 
 

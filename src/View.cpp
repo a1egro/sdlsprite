@@ -78,4 +78,14 @@ void View::processClick(const Vec2f &position)
     }
 }
 
+const SDL_Color &View::getClearColor() const
+{
+    return m_clearColor;
+}
+
+void View::setClearColor(const SDL_Color &clearColor)
+{
+    View::m_clearColor = clearColor;
+}
+
 #undef UNPACK_COL

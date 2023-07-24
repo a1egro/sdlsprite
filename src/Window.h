@@ -14,6 +14,7 @@
 #include <map>
 
 #include "View.h"
+#include "BasicView.h"
 
 class WindowManager;
 
@@ -45,8 +46,8 @@ class Window {
         SDL_DestroyWindow(window);
     }
 
-    template<typename ViewType, class = std::enable_if_t<std::is_base_of_v<View, ViewType>>>
-    void addView(const std::string& name)
+    template<typename ViewType = BasicView, class = std::enable_if_t<std::is_base_of_v<View, ViewType>>>
+    ViewType &addView(const std::string &name)
     {
         if (m_views.find(name) != m_views.end())
         {
@@ -56,6 +57,8 @@ class Window {
         auto view = new ViewType();
         view->init(window);
         m_views[name] = view;
+
+        return *view;
     }
 
     template<typename ViewType, class = std::enable_if_t<std::is_base_of_v<View, ViewType>>>
@@ -73,11 +76,11 @@ class Window {
     void redraw()
     {
         // clearing one view should be enough
+        // TODO: clear color matters!
         m_views.begin()->second->clear();
 
         // render view elements
-        for (const auto& viewPair: m_views)
-        {
+        for (const auto &viewPair: m_views) {
             viewPair.second->render();
         }
 
